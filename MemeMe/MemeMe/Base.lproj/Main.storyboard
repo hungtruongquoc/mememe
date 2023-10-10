@@ -8,28 +8,60 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q3L-W7-FpI">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="695"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vtU-5g-P8f">
+                                <rect key="frame" x="0.0" y="754" width="393" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjb-cE-iow">
+                                        <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="64"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="camera.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="showCamera" destination="BYZ-38-t0r" eventType="touchUpInside" id="wpH-Dn-ufa"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-Et-jFs">
+                                        <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="64"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Album"/>
+                                        <connections>
+                                            <action selector="showAlbum" destination="BYZ-38-t0r" eventType="touchUpInside" id="fiH-uY-Pq4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="6c1-UG-ek7"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Q3L-W7-FpI" secondAttribute="trailing" id="1RI-Id-1fB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Q3L-W7-FpI" secondAttribute="bottom" id="LCg-Uy-jKU"/>
                             <constraint firstItem="Q3L-W7-FpI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="YHz-HC-KlF"/>
                             <constraint firstItem="Q3L-W7-FpI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b3N-gG-Vpw"/>
                             <constraint firstItem="Q3L-W7-FpI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bTL-Lx-t3v"/>
+                            <constraint firstItem="Q3L-W7-FpI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-64" id="d6s-4Y-rPe"/>
+                            <constraint firstItem="vtU-5g-P8f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gai-hr-TYZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vtU-5g-P8f" secondAttribute="trailing" id="gxA-kH-6Nr"/>
+                            <constraint firstItem="vtU-5g-P8f" firstAttribute="top" secondItem="Q3L-W7-FpI" secondAttribute="bottom" id="iYD-IP-lqh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnAlbum" destination="jwh-Et-jFs" id="dv9-xg-Hz4"/>
+                        <outlet property="btnCamera" destination="Wjb-cE-iow" id="NpD-Pk-W8S"/>
+                        <outlet property="imageView" destination="Q3L-W7-FpI" id="32B-nl-mJU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -37,6 +69,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera.fill" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
