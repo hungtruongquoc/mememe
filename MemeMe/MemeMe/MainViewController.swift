@@ -15,6 +15,10 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         print("Done with an image")
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageView.image = image
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showAlbum() {
