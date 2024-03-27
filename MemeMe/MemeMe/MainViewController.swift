@@ -38,7 +38,13 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        btnCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        #if targetEnvironment(simulator)
+            // Disable the camera button when running on the simulator
+            btnCamera.isEnabled = false
+        #else
+            // Enable the camera button if the camera is available when running on a real device
+            btnCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        #endif
     }
     
     func setupTextField(_ textField: UITextField, text: String) {
