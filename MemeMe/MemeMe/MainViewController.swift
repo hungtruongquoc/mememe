@@ -23,11 +23,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupTextField(topTextField, text: "TOP")
-        setupTextField(bottomTextField, text: "BOTTOM")
-        subscribeToKeyboardNotifications()
-        btnShare.isEnabled = false
+        setupUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,14 +33,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        #if targetEnvironment(simulator)
-            // Disable the camera button when running on the simulator
-            btnCamera.isEnabled = false
-        #else
-            // Enable the camera button if the camera is available when running on a real device
-            btnCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        #endif
+        btnCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) && !isSimulator()
     }
     
     func setupTextField(_ textField: UITextField, text: String) {
@@ -76,16 +65,18 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Show album action
     @IBAction func showAlbum() {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
+        pickImageFromSource(btnAlbum)
     }
     
     // Show camera action
     @IBAction func showCamera() {
+        pickImageFromSource(btnCamera)
+    }
+    
+    func pickImageFromSource(_ sender: UIButton) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = sender == btnCamera ? .camera : .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -94,7 +85,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.excludedActivityTypes = [UIActivity.ActivityType.assignToContact, UIActivity.ActivityType.print]
-
+        
         // New completion handler to save the meme after sharing
         activityController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             // Check if the share operation was completed
@@ -107,8 +98,8 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Present the Activity View Controller
         present(activityController, animated: true, completion: nil)
     }
-
-
+    
+    
     
     // UITextFieldDelegate methods
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -132,7 +123,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Add this line to subscribe to the keyboardWillHide notification
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -149,7 +140,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             view.frame.origin.y = 0
         }
     }
-        
+    
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
         
         let userInfo = notification.userInfo
@@ -168,7 +159,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         // Here you would typically do something with the meme object, like adding it to an array or saving it to disk
     }
-
+    
     
     func generateMemedImage() -> UIImage {
         
@@ -179,5 +170,20 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         UIGraphicsEndImageContext()
         
         return memedImage
+    }
+    
+    private func setupUI() {
+        setupTextField(topTextField, text: "TOP")
+        setupTextField(bottomTextField, text: "BOTTOM")
+        subscribeToKeyboardNotifications()
+        btnShare.isEnabled = false
+    }
+    
+    private func isSimulator() -> Bool {
+        #if targetEnvironment(simulator)
+        return true
+        #else
+        return false
+        #endif
     }
 }
