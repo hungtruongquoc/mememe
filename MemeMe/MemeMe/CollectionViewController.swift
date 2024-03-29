@@ -109,6 +109,21 @@ class CollectionViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let detailController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+            detailController.hidesBottomBarWhenPushed = true
+            detailController.inDetailMode = true
+            // Configure the detailController with data from the selected item
+            detailController.bottomText = memes[indexPath.row].bottomText
+            detailController.topText = memes[indexPath.row].topText
+            detailController.originalImage = memes[indexPath.row].originalImage
+            
+            // Push detailController onto the navigation stack
+            navigationController?.pushViewController(detailController, animated: true)
+        }
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking

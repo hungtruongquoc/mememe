@@ -32,8 +32,9 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -58,6 +59,24 @@ class TableViewController: UITableViewController {
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name if different.
+        if let detailController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+            
+            detailController.bottomText = memes[didSelectRowAt.row].bottomText
+            detailController.topText = memes[didSelectRowAt.row].topText
+            detailController.originalImage = memes[didSelectRowAt.row].originalImage
+            detailController.inDetailMode = true
+            detailController.hidesBottomBarWhenPushed = true
+            
+            if let navigationController = self.navigationController {
+                navigationController.pushViewController(detailController, animated: true)
+            }
+        } else {
+            fatalError("Unexpected destination view controller type for MainViewController identifier.")
+        }
     }
 
     /*

@@ -9,6 +9,12 @@ struct Meme {
 
 class MainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    // For getting data to show as a detail view
+    var bottomText: String?
+    var topText: String?
+    var originalImage: UIImage?
+    var inDetailMode: Bool = false
+    
     weak var activeTextField: UITextField?
     
     @IBOutlet var imageView: UIImageView!
@@ -30,20 +36,42 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
+        //Overwritten initialized values with values of a detail view if such values exist
+        if let bottomText = bottomText {
+            bottomTextField.text = bottomText
+        }
+
+        if let topText = topText {
+            topTextField.text = topText
+        }
+
+        if let originalImage = originalImage {
+            imageView.image = originalImage
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-        // Show the navigation bar on other view controllers
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        if (!inDetailMode) {
+            // Show the navigation bar on other view controllers
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         btnCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) && !isSimulator()
-        // Hide the navigation bar on the this view controller
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        btnAlbum.isHidden = inDetailMode
+        btnCamera.isHidden = inDetailMode
+        btnCancel.isHidden = inDetailMode
+        btnShare.isHidden = inDetailMode
+    
+        if (!inDetailMode) {
+            // Hide the navigation bar on the this view controller
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
     }
     
     func setupTextField(_ textField: UITextField, text: String) {
