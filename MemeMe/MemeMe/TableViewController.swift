@@ -55,6 +55,7 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let meme = memes[indexPath.row]
         cell.imageView?.image = meme.memedImage
+        cell.textLabel?.text = meme.topText + " " + meme.bottomText
 
         return cell
     }
