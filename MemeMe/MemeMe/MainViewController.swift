@@ -158,6 +158,10 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let meme = Meme(topText: topText, bottomText: bottomText, originalImage: originalImage, memedImage: memedImage)
         
         // Here you would typically do something with the meme object, like adding it to an array or saving it to disk
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     

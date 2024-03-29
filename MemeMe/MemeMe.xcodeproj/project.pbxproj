@@ -16,6 +16,8 @@
 		197D35EA2AD4F77D004B0C3F /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35E92AD4F77D004B0C3F /* MemeMeTests.swift */; };
 		197D35F42AD4F77D004B0C3F /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35F32AD4F77D004B0C3F /* MemeMeUITests.swift */; };
 		197D35F62AD4F77D004B0C3F /* MemeMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35F52AD4F77D004B0C3F /* MemeMeUITestsLaunchTests.swift */; };
+		19E9A3072BB4EAAB00EB75BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 197D35D82AD4F77C004B0C3F /* Main.storyboard */; };
+		19E9A3082BB4EBB100EB75BD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35D62AD4F77C004B0C3F /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19E9A3072BB4EAAB00EB75BD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				197D35EA2AD4F77D004B0C3F /* MemeMeTests.swift in Sources */,
+				19E9A3082BB4EBB100EB75BD /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
