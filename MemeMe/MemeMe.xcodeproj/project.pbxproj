@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19144B432BB65EA7009F1309 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19144B422BB65EA7009F1309 /* CollectionViewController.swift */; };
+		19144B442BB65EA7009F1309 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19144B422BB65EA7009F1309 /* CollectionViewController.swift */; };
+		19144B462BB65F9B009F1309 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19144B452BB65F9B009F1309 /* TableViewController.swift */; };
+		19144B472BB65F9B009F1309 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19144B452BB65F9B009F1309 /* TableViewController.swift */; };
+		19144B492BB66601009F1309 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19144B482BB66601009F1309 /* CollectionViewCell.swift */; };
+		19144B4A2BB66601009F1309 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19144B482BB66601009F1309 /* CollectionViewCell.swift */; };
 		197D35D32AD4F77C004B0C3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35D22AD4F77C004B0C3F /* AppDelegate.swift */; };
 		197D35D52AD4F77C004B0C3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35D42AD4F77C004B0C3F /* SceneDelegate.swift */; };
 		197D35D72AD4F77C004B0C3F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197D35D62AD4F77C004B0C3F /* MainViewController.swift */; };
@@ -38,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19144B422BB65EA7009F1309 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		19144B452BB65F9B009F1309 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		19144B482BB66601009F1309 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		197D35CF2AD4F77C004B0C3F /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		197D35D22AD4F77C004B0C3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		197D35D42AD4F77C004B0C3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +117,9 @@
 				197D35DB2AD4F77D004B0C3F /* Assets.xcassets */,
 				197D35DD2AD4F77D004B0C3F /* LaunchScreen.storyboard */,
 				197D35E02AD4F77D004B0C3F /* Info.plist */,
+				19144B422BB65EA7009F1309 /* CollectionViewController.swift */,
+				19144B452BB65F9B009F1309 /* TableViewController.swift */,
+				19144B482BB66601009F1309 /* CollectionViewCell.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -261,8 +273,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19144B432BB65EA7009F1309 /* CollectionViewController.swift in Sources */,
 				197D35D72AD4F77C004B0C3F /* MainViewController.swift in Sources */,
+				19144B492BB66601009F1309 /* CollectionViewCell.swift in Sources */,
 				197D35D32AD4F77C004B0C3F /* AppDelegate.swift in Sources */,
+				19144B462BB65F9B009F1309 /* TableViewController.swift in Sources */,
 				197D35D52AD4F77C004B0C3F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,8 +286,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19144B4A2BB66601009F1309 /* CollectionViewCell.swift in Sources */,
+				19144B442BB65EA7009F1309 /* CollectionViewController.swift in Sources */,
 				197D35EA2AD4F77D004B0C3F /* MemeMeTests.swift in Sources */,
 				19E9A3082BB4EBB100EB75BD /* MainViewController.swift in Sources */,
+				19144B472BB65F9B009F1309 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

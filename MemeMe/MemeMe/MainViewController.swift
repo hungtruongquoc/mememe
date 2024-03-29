@@ -21,6 +21,12 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var btnShare: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     
+    @IBAction func btnCancelTapped(_ sender: UIButton) {
+        // Dismiss the current modal view controller
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -29,11 +35,15 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         btnCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) && !isSimulator()
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     func setupTextField(_ textField: UITextField, text: String) {
