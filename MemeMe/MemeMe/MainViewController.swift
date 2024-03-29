@@ -172,6 +172,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
+        btnCancelTapped(btnCancel)
     }
     
     
