@@ -10,22 +10,6 @@ import UIKit
 class TableViewController: UITableViewController {
     @IBOutlet weak var btnShowAddMeme: UIBarButtonItem!
     
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
-    
-    @IBAction func btnShowAddMemeTapped(_ sender: UIBarButtonItem) {
-        // Assuming your MainViewController has a Storyboard ID set to "MainViewControllerID"
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name if different.
-        if let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-            let navController = UINavigationController(rootViewController: mainVC) // Embed in a navigation controller if needed.
-            navController.modalPresentationStyle = .fullScreen
-            self.present(navController, animated: true, completion: nil)
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
@@ -59,24 +43,6 @@ class TableViewController: UITableViewController {
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
 
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name if different.
-        if let detailController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-            
-            detailController.bottomText = memes[didSelectRowAt.row].bottomText
-            detailController.topText = memes[didSelectRowAt.row].topText
-            detailController.originalImage = memes[didSelectRowAt.row].originalImage
-            detailController.inDetailMode = true
-            detailController.hidesBottomBarWhenPushed = true
-            
-            if let navigationController = self.navigationController {
-                navigationController.pushViewController(detailController, animated: true)
-            }
-        } else {
-            fatalError("Unexpected destination view controller type for MainViewController identifier.")
-        }
     }
 
     /*
@@ -124,4 +90,17 @@ class TableViewController: UITableViewController {
     }
     */
 
+}
+
+extension TableViewController: MemeListPresenter {
+    // Now you can call presentMemeViewController(with:) directly in didSelectRowAt
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let meme = memes[indexPath.row]
+        presentMemeDetailScreen(with: meme)
+    }
+    
+    @IBAction func btnShowAddMemeTapped(_ sender: UIBarButtonItem) {
+        // Assuming your MainViewController has a Storyboard ID set to "MainViewControllerID"
+        presentMemeCreationScreen()
+    }
 }

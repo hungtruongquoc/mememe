@@ -15,12 +15,6 @@ class CollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         self.collectionView.reloadData()
     }
@@ -35,16 +29,6 @@ class CollectionViewController: UICollectionViewController {
         //self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
-        
-//        let space: CGFloat = 3.0
-        // Account for spacing on both sides of each item (two spaces per item, three spaces total)
-//        let dimension = (view.frame.size.width - (2 * space)) / 3.0 - space
-
-//        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            layout.minimumInteritemSpacing = space
-//            layout.minimumLineSpacing = space
-//            layout.itemSize = CGSize(width: dimension, height: dimension)
-//        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,16 +45,6 @@ class CollectionViewController: UICollectionViewController {
             layout.minimumLineSpacing = space
             layout.itemSize = CGSize(width: dimension, height: dimension)
             layout.sectionInset = UIEdgeInsets(top: space, left: space, bottom: space, right: space) // Adjust as needed
-        }
-    }
-
-    @IBAction func showNewMeme(_ sender: UIBarButtonItem) {
-        // Assuming your MainViewController has a Storyboard ID set to "MainViewControllerID"
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name if different.
-        if let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-            let navController = UINavigationController(rootViewController: mainVC) // Embed in a navigation controller if needed.
-            navController.modalPresentationStyle = .fullScreen
-            self.present(navController, animated: true, completion: nil)
         }
     }
     /*
@@ -109,21 +83,6 @@ class CollectionViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let detailController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-            detailController.hidesBottomBarWhenPushed = true
-            detailController.inDetailMode = true
-            // Configure the detailController with data from the selected item
-            detailController.bottomText = memes[indexPath.row].bottomText
-            detailController.topText = memes[indexPath.row].topText
-            detailController.originalImage = memes[indexPath.row].originalImage
-            
-            // Push detailController onto the navigation stack
-            navigationController?.pushViewController(detailController, animated: true)
-        }
-    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
@@ -154,4 +113,17 @@ class CollectionViewController: UICollectionViewController {
     }
     */
 
+}
+
+extension CollectionViewController: MemeListPresenter {
+    // Now you can call presentMemeViewController(with:) directly in didSelectRowAt
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let meme = memes[indexPath.row]
+        presentMemeDetailScreen(with: meme)
+    }
+    
+    @IBAction func showNewMeme(_ sender: UIBarButtonItem) {
+        // Assuming your MainViewController has a Storyboard ID set to "MainViewControllerID"
+        presentMemeCreationScreen()
+    }
 }
